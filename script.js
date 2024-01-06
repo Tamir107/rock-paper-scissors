@@ -51,7 +51,6 @@ function game(){
         let roundResult = playRound(getPlayerChoice(), getComputerChoice());
         if(roundResult.search('Lose') === -1){
             userScore++;
-
         }
         else{
             computerScore++;
