@@ -21,8 +21,9 @@ function getPlayerChoice(){
 function playRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
     if(playerSelection === computerSelection){
-        console.log('Its a draw! try again');
-        return playRound(getPlayerChoice(), getComputerChoice());
+        // console.log('Its a draw! try again');
+        // return playRound(getPlayerChoice(), getComputerChoice());
+        return "Its a draw! try again";
     }else if(playerSelection === 'rock'){
         if(computerSelection === 'paper'){
             return "You Lose! Paper beats Rock";
@@ -47,22 +48,39 @@ function playRound(playerSelection, computerSelection){
 function game(){
     let userScore = 0;
     let computerScore = 0;
-    for(let i = 0; i < 5; i++){
-        let roundResult = playRound(getPlayerChoice(), getComputerChoice());
-        if(roundResult.search('Lose') === -1){
-            userScore++;
-        }
-        else{
-            computerScore++;
-        }
-        console.log(roundResult);
-        console.log(`User Score: ${userScore}  Computer Score: ${computerScore}`);
-    }
-    if(userScore > computerScore){
-        console.log('You Won!')
-    }else{
-        console.log('You Lost! :(')
-    }
+    const rockButton = document.querySelector("#Rock");
+    const paperButton = document.querySelector("#Paper");
+    const scissorsButton = document.querySelector("#Scissors");
+    const resultDiv = document.querySelector("#result");
+
+    rockButton.addEventListener("click", () => {
+        alert(playRound("rock",getComputerChoice()));
+    });
+
+    paperButton.addEventListener("click", () => {
+        alert(playRound("paper",getComputerChoice()));
+    });
+
+    scissorsButton.addEventListener("click", () => {
+        alert(playRound("scissors",getComputerChoice()));
+    });
+
+    // for(let i = 0; i < 5; i++){
+    //     let roundResult = playRound(getPlayerChoice(), getComputerChoice());
+    //     if(roundResult.search('Lose') === -1){
+    //         userScore++;
+    //     }
+    //     else{
+    //         computerScore++;
+    //     }
+    //     console.log(roundResult);
+    //     console.log(`User Score: ${userScore}  Computer Score: ${computerScore}`);
+    // }
+    // if(userScore > computerScore){
+    //     console.log('You Won!')
+    // }else{
+    //     console.log('You Lost! :(')
+    // }
 }
 
 game();
