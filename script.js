@@ -45,24 +45,50 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
+function resetGame(){
+    userScore = 0;
+    computerScore = 0;
+    document.querySelector("#result").textContent = "";
+}
+
+function updateScore(str){
+    if(str.includes("Win")) 
+        userScore++;
+    else if(str.includes("Lose"))
+        computerScore++;
+
+    userScoreDisplay.textContent = userScore;
+    computerScoreDisplay.textContent = computerScore;
+
+    if(userScore === 5){
+        alert("You win!");
+        resetGame();
+    }
+    if(computerScore === 5){
+        alert("You Lose!");
+        resetGame();
+    }
+}
+
 function game(){
-    let userScore = 0;
-    let computerScore = 0;
     const rockButton = document.querySelector("#Rock");
     const paperButton = document.querySelector("#Paper");
     const scissorsButton = document.querySelector("#Scissors");
     const resultDiv = document.querySelector("#result");
 
     rockButton.addEventListener("click", () => {
-        alert(playRound("rock",getComputerChoice()));
+        resultDiv.textContent = playRound("rock",getComputerChoice());
+        updateScore(resultDiv.textContent);
     });
 
     paperButton.addEventListener("click", () => {
-        alert(playRound("paper",getComputerChoice()));
+        resultDiv.textContent = playRound("paper",getComputerChoice());
+        updateScore(resultDiv.textContent);
     });
 
     scissorsButton.addEventListener("click", () => {
-        alert(playRound("scissors",getComputerChoice()));
+        resultDiv.textContent = playRound("scissors",getComputerChoice());
+        updateScore(resultDiv.textContent);
     });
 
     // for(let i = 0; i < 5; i++){
@@ -82,5 +108,12 @@ function game(){
     //     console.log('You Lost! :(')
     // }
 }
+
+let userScore = 0;
+let computerScore = 0;
+const userScoreDisplay = document.querySelector("#userScore");
+const computerScoreDisplay = document.querySelector("#computerScore");
+userScoreDisplay.textContent = userScore;
+computerScoreDisplay.textContent = computerScore;
 
 game();
